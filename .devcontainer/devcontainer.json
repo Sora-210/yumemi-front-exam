@@ -1,0 +1,25 @@
+{
+  "name": "Node.js version 18 & TypeScript",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/work",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.encoding": "utf8",
+        "editor.tabSize": 2,
+        "eslint.workingDirectories": [
+          { "mode": "auto" }
+        ],
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "octref.vetur",
+        "dariofuzinato.vue-peek",
+        "mhutchie.git-graph",
+        "ms-vscode.vscode-typescript-next"
+      ]
+    }
+  },
+	"remoteUser": "root"
+}
