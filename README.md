@@ -20,3 +20,8 @@
 | docs | ドキュメント更新 |
 | test | テスト関連 |
 | chore | その他 |
+
+#### Compoment Name
+コンポーネント名のprefixとして`S`をつけること
+
+`例:SButtom`
