@@ -1,0 +1,7 @@
+{
+  "files.encoding": "utf8",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+    "source.fixAll.eslint": true
+  }
+}
