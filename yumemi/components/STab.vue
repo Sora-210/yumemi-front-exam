@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-buttom" :class="props.isActive ? 'active' : ''">
+  <div class="tab-button" :class="props.isActive ? 'active' : ''">
     <slot></slot>
   </div>
 </template>
@@ -14,14 +14,14 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.tab-buttom {
+.tab-button {
   display: inline-block;
   padding: 0.3em 1.5em;
   cursor: pointer;
   transition: background-color ease 0.3s;
   white-space: nowrap;
 }
-.tab-buttom:hover {
+.tab-button:hover {
   background-color: #c6dbf080;
   transition: background-color ease 0.3s;
 }
