@@ -12,6 +12,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, defineProps, defineEmits, onMounted, watch } from 'vue'
+
 const isChecked = ref(false)
 
 const props = defineProps({

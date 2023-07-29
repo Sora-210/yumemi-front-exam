@@ -15,6 +15,16 @@
 </template>
 
 <script setup lang="ts">
+import {
+  ref,
+  defineProps,
+  defineEmits,
+  onMounted,
+  watch,
+  useSlots,
+  computed,
+} from 'vue'
+
 const activeTab = ref('')
 
 const props = defineProps({
