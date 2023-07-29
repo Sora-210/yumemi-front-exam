@@ -1307,6 +1307,11 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
+"@highcharts/map-collection@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@highcharts/map-collection/-/map-collection-2.1.0.tgz#a3e40a4d73586028f22c758ebfed0161986320f3"
+  integrity sha512-oS7ELhgvltY7OVPG4EFHHcdLRSKu2Fwvg2B9eXRo/Get4rZPUoLwv5i+bUcPb5JYLxzhHVNniuw01yMJAnXJ8g==
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.10.tgz#5a3ffe32cc9306365fb3fd572596cd602d5e12d2"
@@ -4969,6 +4974,11 @@ hash-sum@^2.0.0:
   resolved "https://registry.yarnpkg.com/hash-sum/-/hash-sum-2.0.0.tgz#81d01bb5de8ea4a214ad5d6ead1b523460b0b45a"
   integrity sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==
 
+highcharts@^10.3.1:
+  version "10.3.3"
+  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-10.3.3.tgz#b8acca24f2d4b1f2f726540734166e59e07b35c4"
+  integrity sha512-r7wgUPQI9tr3jFDn3XT36qsNwEIZYcfgz4mkKEA6E4nn5p86y+u1EZjazIG4TRkl5/gmGRtkBUiZW81g029RIw==
+
 hookable@^5.5.3:
   version "5.5.3"
   resolved "https://registry.yarnpkg.com/hookable/-/hookable-5.5.3.tgz#6cfc358984a1ef991e2518cb9ed4a778bbd3215d"
@@ -6477,6 +6487,15 @@ nuxi@3.6.5:
   integrity sha512-4XEXYz71UiWWiKC1/cJCzqRSUEImYRmjcvKpSsBKMU58ALYVSx5KIoas5SwLO8tEKO5BS4DAe4u7MYix7hfuHQ==
   optionalDependencies:
     fsevents "~2.3.2"
+
+nuxt-highcharts@^3.0.11:
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/nuxt-highcharts/-/nuxt-highcharts-3.0.11.tgz#389715023105286e8a7675b0d3578ef544533c65"
+  integrity sha512-V0O/BhQhz9s7uNdsw9oK+DowrccgzRM9+AJ5Wl/YrkGJE9AZMQeLuz2/pUTM/FbMvwA06NrjdFFK+JPOqQw2Hw==
+  dependencies:
+    highcharts "^10.3.1"
+  optionalDependencies:
+    "@highcharts/map-collection" "^2.0.0"
 
 nuxt@^3.6.5:
   version "3.6.5"
