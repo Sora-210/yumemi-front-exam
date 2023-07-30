@@ -1,4 +1,5 @@
 import { ref, reactive, computed, onMounted } from 'vue'
+import { XAxisOptions, YAxisOptions } from 'highcharts'
 import { useTab } from '../composables/useTab'
 import { useLoading } from '../composables/useLoading'
 import {
@@ -12,21 +13,48 @@ interface ChartOption {
   title: {
     text: String
   }
+  xAxis: XAxisOptions
+  yAxis: YAxisOptions
+  series: ChartPopulation[]
+}
+
+const Axis: {
+  xAxis: XAxisOptions
+  yAxis: YAxisOptions
+} = {
   xAxis: {
     title: {
-      text: String
-    }
-    categories: String[] | Number[]
-  }
+      text: '年',
+    },
+    categories: [
+      '1960',
+      '1965',
+      '1970',
+      '1975',
+      '1980',
+      '1985',
+      '1990',
+      '1995',
+      '2000',
+      '2005',
+      '2010',
+      '2015',
+      '2020',
+      '2025',
+      '2030',
+      '2035',
+      '2040',
+      '2045',
+    ],
+  },
   yAxis: {
     title: {
-      text: String
-    }
+      text: '人数',
+    },
     labels: {
-      format: String
-    }
-  }
-  series: ChartPopulation[]
+      format: '{value}',
+    },
+  },
 }
 
 export const useApp = () => {
@@ -69,92 +97,28 @@ export const useApp = () => {
       title: {
         text: '総人口',
       },
-      xAxis: {
-        title: {
-          text: '年',
-        },
-        categories: [
-          1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010,
-          2015, 2020, 2025, 2030, 2035, 2040, 2045,
-        ],
-      },
-      yAxis: {
-        title: {
-          text: '人数',
-        },
-        labels: {
-          format: '{value}',
-        },
-      },
+      ...Axis,
       series: [],
     },
     young: {
       title: {
         text: '年少人口',
       },
-      xAxis: {
-        title: {
-          text: '年',
-        },
-        categories: [
-          1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010,
-          2015, 2020, 2025, 2030, 2035, 2040, 2045,
-        ],
-      },
-      yAxis: {
-        title: {
-          text: '人数',
-        },
-        labels: {
-          format: '{value}',
-        },
-      },
+      ...Axis,
       series: [],
     },
     working: {
       title: {
         text: '生産年齢人口',
       },
-      xAxis: {
-        title: {
-          text: '年',
-        },
-        categories: [
-          1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010,
-          2015, 2020, 2025, 2030, 2035, 2040, 2045,
-        ],
-      },
-      yAxis: {
-        title: {
-          text: '人数',
-        },
-        labels: {
-          format: '{value}',
-        },
-      },
+      ...Axis,
       series: [],
     },
     old: {
       title: {
         text: '老年人口',
       },
-      xAxis: {
-        title: {
-          text: '年',
-        },
-        categories: [
-          1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010,
-          2015, 2020, 2025, 2030, 2035, 2040, 2045,
-        ],
-      },
-      yAxis: {
-        title: {
-          text: '人数',
-        },
-        labels: {
-          format: '{value}',
-        },
-      },
+      ...Axis,
       series: [],
     },
   })
@@ -191,6 +155,7 @@ export const useApp = () => {
       }
       isLoading.value = false
     }
+
     chartOptions.total.series = dataFilter(
       data.total.concat(),
       activePrefectures.value
