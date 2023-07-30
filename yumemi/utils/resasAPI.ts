@@ -65,7 +65,7 @@ const fetchPrefectures = async (): Promise<Prefecture[]> => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
-        'X-API-KEY': useRuntimeConfig().public.API_KEY,
+        'X-API-KEY': useRuntimeConfig().public.apiKey,
       },
     }
   ).then(async (response) => {
@@ -95,7 +95,7 @@ const fetchPeople = async (
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
-          'X-API-KEY': useRuntimeConfig().public.API_KEY,
+          'X-API-KEY': useRuntimeConfig().public.apiKey,
         },
       }
     ).then(async (response) => {
