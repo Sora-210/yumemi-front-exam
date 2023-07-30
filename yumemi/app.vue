@@ -1,10 +1,6 @@
 <template>
   <div class="app">
-    <s-loading-over-lay
-      :is-show="isLoading"
-      :message="loadingMessage"
-      @click="isLoading = false"
-    />
+    <s-loading-over-lay :is-show="isLoading" :message="loadingMessage" />
     <s-header> 人口推移グラフ </s-header>
     <s-main-container class="main">
       <section>
