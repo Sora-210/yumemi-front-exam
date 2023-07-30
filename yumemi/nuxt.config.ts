@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   modules: ['nuxt-highcharts'],
   runtimeConfig: {
     public: {
-      API_KEY: '',
+      apiKey: process.env.API_KEY || '',
     },
   },
 })
