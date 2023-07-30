@@ -13,6 +13,9 @@ interface ChartOption {
     text: String
   }
   xAxis: {
+    title: {
+      text: String
+    }
     categories: String[] | Number[]
   }
   yAxis: {
@@ -43,14 +46,12 @@ export const useApp = () => {
   })
 
   const data = reactive<{
-    label: Number[]
     prefectures: String[]
     total: ChartPopulation[]
     young: ChartPopulation[]
     working: ChartPopulation[]
     old: ChartPopulation[]
   }>({
-    label: [],
     prefectures: [],
     total: [],
     young: [],
@@ -69,7 +70,13 @@ export const useApp = () => {
         text: '総人口',
       },
       xAxis: {
-        categories: data.label,
+        title: {
+          text: '年',
+        },
+        categories: [
+          1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010,
+          2015, 2020, 2025, 2030, 2035, 2040, 2045,
+        ],
       },
       yAxis: {
         title: {
@@ -86,7 +93,13 @@ export const useApp = () => {
         text: '年少人口',
       },
       xAxis: {
-        categories: data.label,
+        title: {
+          text: '年',
+        },
+        categories: [
+          1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010,
+          2015, 2020, 2025, 2030, 2035, 2040, 2045,
+        ],
       },
       yAxis: {
         title: {
@@ -103,7 +116,13 @@ export const useApp = () => {
         text: '生産年齢人口',
       },
       xAxis: {
-        categories: data.label,
+        title: {
+          text: '年',
+        },
+        categories: [
+          1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010,
+          2015, 2020, 2025, 2030, 2035, 2040, 2045,
+        ],
       },
       yAxis: {
         title: {
@@ -120,7 +139,13 @@ export const useApp = () => {
         text: '老年人口',
       },
       xAxis: {
-        categories: data.label,
+        title: {
+          text: '年',
+        },
+        categories: [
+          1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010,
+          2015, 2020, 2025, 2030, 2035, 2040, 2045,
+        ],
       },
       yAxis: {
         title: {
