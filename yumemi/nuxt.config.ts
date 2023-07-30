@@ -7,4 +7,17 @@ export default defineNuxtConfig({
       apiKey: process.env.API_KEY || '',
     },
   },
+  app: {
+    head: {
+      title: '人口推移',
+      htmlAttrs: {
+        lang: 'ja',
+      },
+      meta: [
+        {
+          charset: 'utf-8',
+        },
+      ],
+    },
+  },
 })
