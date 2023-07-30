@@ -12,12 +12,12 @@
           <s-card-title> 都道府県選択 </s-card-title>
           <div class="select-list">
             <s-check-box
-              v-for="select in selectList"
-              :key="select.key"
-              v-model="select.isChecked"
-              :name="select.name"
+              v-for="prefecture in prefectures"
+              :key="prefecture.key"
+              v-model="prefecture.isChecked"
+              :name="prefecture.name"
             >
-              {{ select.name }}
+              {{ prefecture.name }}
             </s-check-box>
           </div>
           <div class="select-action">
@@ -30,16 +30,16 @@
           <s-card-title> 推移グラフ </s-card-title>
           <s-tab-box v-model="activeTab" :tabs="tabList">
             <template #total>
-              <h1>総人口</h1>
+              <highchart :options="chartOptions.total" />
             </template>
             <template #young>
-              <h1>年少人口</h1>
+              <highchart :options="chartOptions.young" />
             </template>
             <template #working>
-              <h1>生産年齢人口</h1>
+              <highchart :options="chartOptions.working" />
             </template>
             <template #old>
-              <h1>老年人口</h1>
+              <highchart :options="chartOptions.old" />
             </template>
           </s-tab-box>
         </s-card>
@@ -50,52 +50,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const isLoading = ref(true)
-const loadingMessage = ref('データ取得中...')
-
-const selectList = ref([
-  {
-    name: '選択肢1',
-    key: 'select1',
-    isChecked: false,
-  },
-  {
-    name: '選択肢2',
-    key: 'select2',
-    isChecked: false,
-  },
-  {
-    name: '選択肢3',
-    key: 'select3',
-    isChecked: false,
-  },
-])
-
-const activeTab = ref('total')
-const tabList = [
-  {
-    name: '総人口',
-    key: 'total',
-  },
-  {
-    name: '年少人口',
-    key: 'young',
-  },
-  {
-    name: '生産年齢人口',
-    key: 'working',
-  },
-  {
-    name: '老年人口',
-    key: 'old',
-  },
-]
-
-const updateGragh = () => {
-  console.log(selectList.value)
-}
+import { useApp } from './composables/useApp'
+const {
+  tabList,
+  activeTab,
+  isLoading,
+  loadingMessage,
+  prefectures,
+  chartOptions,
+  updateGragh,
+} = useApp()
 </script>
 
 <style>
@@ -117,7 +81,7 @@ li {
 }
 .main {
   min-height: calc(100vh - 67.19px - 40px - 27.19px);
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 }
 
 .select-list {
