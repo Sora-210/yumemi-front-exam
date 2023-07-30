@@ -28,10 +28,6 @@ Issueを建てた内容の開発を行う際は`dev`ブランチからそれぞ�
 - `<issuePrefix>/<userName>/<概要>#<IssueNumber>`
 Issue作業用
 
-
-
-
-
 #### Commit Prefix
 | Name | Content |
 | ---- | ------- |

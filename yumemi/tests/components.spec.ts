@@ -149,7 +149,6 @@ describe('STabBox', () => {
     })
     await nextTick()
 
-    console.log(wrapper.html())
     expect(wrapper.findAll('.box')).toHaveLength(1)
     expect(wrapper.findAll('.box').at(0)?.text()).toContain('Tab1')
   })
