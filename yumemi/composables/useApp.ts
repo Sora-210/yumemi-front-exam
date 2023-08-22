@@ -189,5 +189,6 @@ export const useApp = () => {
     data,
     chartOptions,
     updateGragh,
+    dataFilter,
   }
 }

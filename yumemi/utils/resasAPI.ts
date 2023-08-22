@@ -143,4 +143,5 @@ export {
   ChartPopulationsOfPrefecture,
   fetchPrefectures,
   fetchPeople,
+  resasRes2PopulationArray,
 }
