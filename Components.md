@@ -4,6 +4,7 @@
 - SMainContainer
 - SFooter
 - SLoadingOverLay
+- SApiMessageOverLay
 - SButton
 - SCheckBox
 - SCard
@@ -69,6 +70,25 @@
 #### Example
 ```
 <s-loading-over-lay :is-show="true" message="メッセージ" />
+```
+
+### SApiMessageOverLay
+#### About
+画面全体をグレー化して操作不可能にします
+
+APIのステータスコードを入力することで説明文を表示します
+
+#### Props
+- isShow
+  - Type: Boolean
+  - required: true
+- statusCode
+  - Type: String
+  - required: false
+  - default: '500'
+#### Example
+```
+<s-api-message-over-lay :is-show="true" statusCode="404" />
 ```
 
 ### SCheckBox

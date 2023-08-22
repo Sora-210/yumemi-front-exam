@@ -69,6 +69,10 @@ const fetchPrefectures = async (): Promise<Prefecture[]> => {
       },
     }
   ).then(async (response) => {
+    if (response.status !== 200) {
+      throw new Error(`API:${response.status}`)
+    }
+
     const resJson: ResasPrefectureResult = await response.json()
     const list: Prefecture[] = []
     resJson.result.forEach((value) => {
@@ -99,6 +103,10 @@ const fetchPeople = async (
         },
       }
     ).then(async (response) => {
+      if (response.status !== 200) {
+        throw new Error(`API:${response.status}`)
+      }
+
       const resJson: ResasPopulationResult = await response.json()
       return {
         total: resasRes2PopulationArray(resJson.result.data[0]),
