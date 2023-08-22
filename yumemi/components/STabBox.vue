@@ -15,50 +15,33 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  defineProps,
-  defineEmits,
-  onMounted,
-  watch,
-  useSlots,
-  computed,
-} from 'vue'
+import { withDefaults, defineProps, defineEmits, useSlots, computed } from 'vue'
 
-const activeTab = ref('')
-
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: false,
-    default: '',
-  },
-  tabs: {
-    type: Array<{
-      name: String
-      key: String
-    }>,
-    required: false,
-    default: [],
-  },
+interface STabBoxProps {
+  modelValue?: string
+  tabs?: Array<{
+    name: string
+    key: string
+  }>
+}
+const props = withDefaults(defineProps<STabBoxProps>(), {
+  modelValue: '',
+  tabs: () => [],
 })
 const emits = defineEmits<{ (e: 'update:modelValue', value: String): void }>()
 
-onMounted(() => {
-  activeTab.value = props.modelValue
+const activeTab = computed({
+  get: (): string => {
+    return props.modelValue
+  },
+  set: (value: string) => {
+    emits('update:modelValue', value)
+  },
 })
 
 const changeValue = (v) => {
   activeTab.value = v
-  emits('update:modelValue', v)
 }
-
-watch(
-  () => props.modelValue,
-  (v) => {
-    activeTab.value = v
-  }
-)
 
 const slots = useSlots()
 const slotNames = computed(() => {

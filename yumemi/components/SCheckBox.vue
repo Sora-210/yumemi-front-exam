@@ -12,39 +12,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, onMounted, watch } from 'vue'
+import { withDefaults, defineProps, defineEmits, computed } from 'vue'
 
-const isChecked = ref(false)
-
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-  name: {
-    type: [String, Number],
-    required: false,
-    default: '',
-  },
+interface SCheckBoxProps {
+  modelValue?: boolean
+  name?: string | number
+}
+const props = withDefaults(defineProps<SCheckBoxProps>(), {
+  modelValue: false,
+  name: '',
 })
 const emits = defineEmits<{ (e: 'update:modelValue', value: Boolean): void }>()
 
-onMounted(() => {
-  isChecked.value = props.modelValue
+const isChecked = computed({
+  get: (): boolean => {
+    return props.modelValue
+  },
+  set: (value: boolean) => {
+    emits('update:modelValue', value)
+  },
 })
 
 const changeValue = (v) => {
   isChecked.value = v
-  emits('update:modelValue', v)
 }
-
-watch(
-  () => props.modelValue,
-  (v) => {
-    isChecked.value = v
-  }
-)
 </script>
 
 <style scoped>
@@ -56,7 +47,12 @@ watch(
 }
 
 input[type='checkbox'] {
-  display: none;
+  position: absolute;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  appearance: none;
+  -moz-opacity: 0;
+  -webkit-appearance: none;
 }
 
 .checkbox-icon {
@@ -65,6 +61,8 @@ input[type='checkbox'] {
   border-radius: 20px;
   transition: background-color ease 0.2s;
 }
+
+.checkbox input:focus + .checkbox-icon,
 .checkbox:hover .checkbox-icon {
   background-color: #c6dbf080;
   transition: background-color ease 0.2s;

@@ -12,6 +12,7 @@ import SCardTitle from '../components/SCardTitle.vue'
 import STabBox from '../components/STabBox.vue'
 import STab from '../components/STab.vue'
 import STabList from '../components/STabList.vue'
+import SApiMessageOverLay from '../components/SApiMessageOverLay.vue'
 
 describe('SHeader', () => {
   test('slotが正しく表示される', () => {
@@ -96,9 +97,9 @@ describe('SCheckBox', () => {
         default: '選択肢1',
       },
     })
-    const old = wrapper.vm.isChecked
-    await wrapper.find('input[type=checkbox]').setChecked()
-    expect(wrapper.vm.isChecked).not.toBe(old)
+    await wrapper.find('input[type=checkbox]').setValue(true)
+    expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
+    expect(wrapper.emitted()['update:modelValue'][0]).toStrictEqual([true])
   })
 })
 
@@ -258,9 +259,41 @@ describe('STabList', () => {
         ],
       },
     })
-    const oldVal = wrapper.vm.activeTab
     await wrapper.findAll('s-tab').at(1)?.trigger('click')
-    const newVal = wrapper.vm.activeTab
-    expect(oldVal).not.toBe(newVal)
+    expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
+    expect(wrapper.emitted()['update:modelValue'][0]).toStrictEqual(['tab2'])
+  })
+})
+
+describe('SApiMessageOverLay', () => {
+  test('表示が正しく制御されている', async () => {
+    const wrapper = mount(SApiMessageOverLay, {
+      props: {
+        isShow: true,
+      },
+    })
+    expect(wrapper.find('.wrap-api-message').exists()).toBe(true)
+
+    await wrapper.setProps({
+      isShow: false,
+    })
+    expect(wrapper.find('.wrap-api-message').exists()).toBe(false)
+  })
+
+  test('メッセージが正しく切り替わっている', async () => {
+    const wrapper = mount(SApiMessageOverLay, {
+      props: {
+        isShow: true,
+      },
+    })
+    expect(wrapper.find('p').text()).toBe('データ取得中に問題が発生しました')
+
+    await wrapper.setProps({
+      isShow: true,
+      statusCode: '429',
+    })
+    expect(wrapper.find('p').text()).toBe(
+      'アクセスが集中しています。時間を空けて再度アクセスしてください。'
+    )
   })
 })
