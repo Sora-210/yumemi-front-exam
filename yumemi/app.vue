@@ -1,5 +1,9 @@
 <template>
   <div class="app">
+    <s-api-message-over-lay
+      :is-show="isAPIMessage"
+      :status-code="apiStatuCode"
+    />
     <s-loading-over-lay :is-show="isLoading" :message="loadingMessage" />
     <s-header> 人口推移グラフ </s-header>
     <s-main-container class="main">
@@ -52,6 +56,8 @@ const {
   activeTab,
   isLoading,
   loadingMessage,
+  isAPIMessage,
+  apiStatuCode,
   prefectures,
   chartOptions,
   updateGragh,

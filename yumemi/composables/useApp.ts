@@ -8,6 +8,7 @@ import {
   Prefecture,
   ChartPopulation,
 } from '../utils/resasAPI'
+import { useAPIMessage } from './useAPIMessage'
 
 interface ChartOption {
   title: {
@@ -60,6 +61,7 @@ const Axis: {
 export const useApp = () => {
   const { tabList, activeTab } = useTab()
   const { isLoading, loadingMessage } = useLoading()
+  const { isAPIMessage, apiStatuCode } = useAPIMessage()
 
   const prefectures = ref<Prefecture[]>([])
 
@@ -145,14 +147,21 @@ export const useApp = () => {
     )
     if (notPrefectures.length) {
       isLoading.value = true
-      const response = await fetchPeople(notPrefectures)
-      for (const row of response) {
-        data.prefectures.push(row.name)
-        data.total.push(row.data.total)
-        data.young.push(row.data.young)
-        data.working.push(row.data.working)
-        data.old.push(row.data.old)
-      }
+      await fetchPeople(notPrefectures)
+        .then((response) => {
+          for (const row of response) {
+            data.prefectures.push(row.name)
+            data.total.push(row.data.total)
+            data.young.push(row.data.young)
+            data.working.push(row.data.working)
+            data.old.push(row.data.old)
+          }
+        })
+        .catch((e) => {
+          isAPIMessage.value = true
+          apiStatuCode.value = e.message.split(':')[1]
+        })
+
       isLoading.value = false
     }
 
@@ -175,7 +184,14 @@ export const useApp = () => {
   }
 
   onMounted(async () => {
-    prefectures.value = await fetchPrefectures()
+    await fetchPrefectures()
+      .then((response) => {
+        prefectures.value = response
+      })
+      .catch((e) => {
+        isAPIMessage.value = true
+        apiStatuCode.value = e.message.split(':')[1]
+      })
     isLoading.value = false
   })
 
@@ -184,6 +200,8 @@ export const useApp = () => {
     activeTab,
     isLoading,
     loadingMessage,
+    isAPIMessage,
+    apiStatuCode,
     prefectures,
     activePrefectures,
     data,
