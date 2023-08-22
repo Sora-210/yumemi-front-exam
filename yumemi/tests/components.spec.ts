@@ -96,9 +96,9 @@ describe('SCheckBox', () => {
         default: '選択肢1',
       },
     })
-    const old = wrapper.vm.isChecked
-    await wrapper.find('input[type=checkbox]').setChecked()
-    expect(wrapper.vm.isChecked).not.toBe(old)
+    await wrapper.find('input[type=checkbox]').setValue(true)
+    expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
+    expect(wrapper.emitted()['update:modelValue'][0]).toStrictEqual([true])
   })
 })
 
@@ -258,9 +258,8 @@ describe('STabList', () => {
         ],
       },
     })
-    const oldVal = wrapper.vm.activeTab
     await wrapper.findAll('s-tab').at(1)?.trigger('click')
-    const newVal = wrapper.vm.activeTab
-    expect(oldVal).not.toBe(newVal)
+    expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
+    expect(wrapper.emitted()['update:modelValue'][0]).toStrictEqual(['tab2'])
   })
 })
