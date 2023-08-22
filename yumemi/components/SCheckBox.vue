@@ -47,7 +47,12 @@ const changeValue = (v) => {
 }
 
 input[type='checkbox'] {
-  display: none;
+  position: absolute;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  appearance: none;
+  -moz-opacity: 0;
+  -webkit-appearance: none;
 }
 
 .checkbox-icon {
@@ -56,6 +61,8 @@ input[type='checkbox'] {
   border-radius: 20px;
   transition: background-color ease 0.2s;
 }
+
+.checkbox input:focus + .checkbox-icon,
 .checkbox:hover .checkbox-icon {
   background-color: #c6dbf080;
   transition: background-color ease 0.2s;
