@@ -11,24 +11,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, onMounted, watch } from 'vue'
+import {
+  ref,
+  withDefaults,
+  defineProps,
+  defineEmits,
+  onMounted,
+  watch,
+} from 'vue'
 
 const activeTab = ref('')
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: false,
-    default: '',
-  },
-  tabs: {
-    type: Array<{
-      name: String
-      key: String
-    }>,
-    required: false,
-    default: [],
-  },
+interface STabListProps {
+  modelValue?: string
+  tabs?: Array<{
+    name: string
+    key: string
+  }>
+}
+const props = withDefaults(defineProps<STabListProps>(), {
+  modelValue: '',
+  tabs: () => [],
 })
 const emits = defineEmits<{ (e: 'update:modelValue', value: String): void }>()
 

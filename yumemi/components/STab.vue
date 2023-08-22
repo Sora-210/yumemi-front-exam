@@ -7,12 +7,10 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 
-const props = defineProps({
-  isActive: {
-    type: Boolean,
-    required: true,
-  },
-})
+interface STabProps {
+  isActive: Boolean
+}
+const props = defineProps<STabProps>()
 </script>
 
 <style scoped>

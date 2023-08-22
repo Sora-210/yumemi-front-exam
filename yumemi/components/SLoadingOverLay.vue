@@ -6,18 +6,14 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { withDefaults, defineProps } from 'vue'
 
-const props = defineProps({
-  isShow: {
-    type: Boolean,
-    required: true,
-  },
-  message: {
-    type: String,
-    required: false,
-    default: '',
-  },
+interface SLoadingOverLayProps {
+  isShow: boolean
+  message?: string
+}
+const props = withDefaults(defineProps<SLoadingOverLayProps>(), {
+  message: '',
 })
 </script>
 

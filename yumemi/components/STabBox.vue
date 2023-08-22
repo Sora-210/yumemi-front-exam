@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import {
   ref,
+  withDefaults,
   defineProps,
   defineEmits,
   onMounted,
@@ -27,20 +28,16 @@ import {
 
 const activeTab = ref('')
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: false,
-    default: '',
-  },
-  tabs: {
-    type: Array<{
-      name: String
-      key: String
-    }>,
-    required: false,
-    default: [],
-  },
+interface STabBoxProps {
+  modelValue?: string
+  tabs?: Array<{
+    name: string
+    key: string
+  }>
+}
+const props = withDefaults(defineProps<STabBoxProps>(), {
+  modelValue: '',
+  tabs: () => [],
 })
 const emits = defineEmits<{ (e: 'update:modelValue', value: String): void }>()
 
