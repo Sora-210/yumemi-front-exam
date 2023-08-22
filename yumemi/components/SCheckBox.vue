@@ -12,16 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  withDefaults,
-  defineProps,
-  defineEmits,
-  onMounted,
-  watch,
-} from 'vue'
-
-const isChecked = ref(false)
+import { withDefaults, defineProps, defineEmits, computed } from 'vue'
 
 interface SCheckBoxProps {
   modelValue?: boolean
@@ -33,21 +24,18 @@ const props = withDefaults(defineProps<SCheckBoxProps>(), {
 })
 const emits = defineEmits<{ (e: 'update:modelValue', value: Boolean): void }>()
 
-onMounted(() => {
-  isChecked.value = props.modelValue
+const isChecked = computed({
+  get: (): boolean => {
+    return props.modelValue
+  },
+  set: (value: boolean) => {
+    emits('update:modelValue', value)
+  },
 })
 
 const changeValue = (v) => {
   isChecked.value = v
-  emits('update:modelValue', v)
 }
-
-watch(
-  () => props.modelValue,
-  (v) => {
-    isChecked.value = v
-  }
-)
 </script>
 
 <style scoped>

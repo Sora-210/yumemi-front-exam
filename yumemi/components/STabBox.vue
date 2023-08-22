@@ -15,18 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  withDefaults,
-  defineProps,
-  defineEmits,
-  onMounted,
-  watch,
-  useSlots,
-  computed,
-} from 'vue'
-
-const activeTab = ref('')
+import { withDefaults, defineProps, defineEmits, useSlots, computed } from 'vue'
 
 interface STabBoxProps {
   modelValue?: string
@@ -41,21 +30,18 @@ const props = withDefaults(defineProps<STabBoxProps>(), {
 })
 const emits = defineEmits<{ (e: 'update:modelValue', value: String): void }>()
 
-onMounted(() => {
-  activeTab.value = props.modelValue
+const activeTab = computed({
+  get: (): string => {
+    return props.modelValue
+  },
+  set: (value: string) => {
+    emits('update:modelValue', value)
+  },
 })
 
 const changeValue = (v) => {
   activeTab.value = v
-  emits('update:modelValue', v)
 }
-
-watch(
-  () => props.modelValue,
-  (v) => {
-    activeTab.value = v
-  }
-)
 
 const slots = useSlots()
 const slotNames = computed(() => {

@@ -11,16 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  withDefaults,
-  defineProps,
-  defineEmits,
-  onMounted,
-  watch,
-} from 'vue'
-
-const activeTab = ref('')
+import { withDefaults, defineProps, defineEmits, computed } from 'vue'
 
 interface STabListProps {
   modelValue?: string
@@ -35,21 +26,18 @@ const props = withDefaults(defineProps<STabListProps>(), {
 })
 const emits = defineEmits<{ (e: 'update:modelValue', value: String): void }>()
 
-onMounted(() => {
-  activeTab.value = props.modelValue
+const activeTab = computed({
+  get: (): string => {
+    return props.modelValue
+  },
+  set: (value: string) => {
+    emits('update:modelValue', value)
+  },
 })
 
 const changeValue = (v) => {
   activeTab.value = v
-  emits('update:modelValue', v)
 }
-
-watch(
-  () => props.modelValue,
-  (v) => {
-    activeTab.value = v
-  }
-)
 </script>
 
 <style scoped>
